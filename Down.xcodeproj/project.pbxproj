@@ -65,6 +65,7 @@
 		8AFAEB091E6E331700E09B68 /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D438696B1D00D27700E95A1F /* StringTests.swift */; };
 		907C64651EC133780095FEE1 /* TestDownView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 907C64621EC120530095FEE1 /* TestDownView.bundle */; };
 		90A40A9C1EC03292004F2E91 /* Down.framework in Copy Bundled Frameworks */ = {isa = PBXBuildFile; fileRef = 8A569F401E6B3E50008BE2AC /* Down.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B9468F6D28008AB700C0842A /* Strikethrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9468F6C28008AB700C0842A /* Strikethrough.swift */; };
 		EE0E54F82300800E0070C83F /* BlockBackgroundColorAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E54F72300800E0070C83F /* BlockBackgroundColorAttribute.swift */; };
 		EE3E7E38260400E800170A52 /* DownDebugLayoutManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5D2DF822FC9E89009EC13E /* DownDebugLayoutManagerTests.swift */; };
 		EE3E7E3F260400EE00170A52 /* LinkStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5D2DF522FC99A6009EC13E /* LinkStyleTests.swift */; };
@@ -210,6 +211,7 @@
 		90A40A981EC0309A004F2E91 /* Deployment-Targets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Deployment-Targets.xcconfig"; sourceTree = "<group>"; };
 		90A40A991EC0309A004F2E91 /* Universal-Framework-Target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Universal-Framework-Target.xcconfig"; sourceTree = "<group>"; };
 		90A40A9A1EC0309A004F2E91 /* Universal-Target-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Universal-Target-Base.xcconfig"; sourceTree = "<group>"; };
+		B9468F6C28008AB700C0842A /* Strikethrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strikethrough.swift; sourceTree = "<group>"; };
 		D41689B21CFFE28200E5802B /* DownViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownViewTests.swift; sourceTree = "<group>"; };
 		D41689B51CFFE6BB00E5802B /* DownView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DownView.bundle; sourceTree = "<group>"; };
 		D4201EC51CFA59A5008EEC6E /* BindingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingTests.swift; sourceTree = "<group>"; };
@@ -703,6 +705,7 @@
 				EEEBEE5A225D2A7E00AE438D /* Text.swift */,
 				EEEBEE58225D2A7000AE438D /* ThematicBreak.swift */,
 				26CABB92252B4D490032183C /* ChildSequence.swift */,
+				B9468F6C28008AB700C0842A /* Strikethrough.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -991,6 +994,7 @@
 				EEEBEE4F225D2A1400AE438D /* CodeBlock.swift in Sources */,
 				EED8DA8E22BE404F00E54492 /* DownStyler.swift in Sources */,
 				EEEBEE5F225D2AA700AE438D /* LineBreak.swift in Sources */,
+				B9468F6D28008AB700C0842A /* Strikethrough.swift in Sources */,
 				EEEBEE61225D2AC000AE438D /* Code.swift in Sources */,
 				8A569F491E6B3ED9008BE2AC /* blocks.c in Sources */,
 				EEF137712259E7E700D7DDE0 /* Visitor.swift in Sources */,

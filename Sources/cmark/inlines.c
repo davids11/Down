@@ -29,7 +29,7 @@ static const char *RIGHTSINGLEQUOTE = "\xE2\x80\x99";
 #define make_softbreak(mem) make_simple(mem, CMARK_NODE_SOFTBREAK)
 #define make_emph(mem) make_simple(mem, CMARK_NODE_EMPH)
 #define make_strong(mem) make_simple(mem, CMARK_NODE_STRONG)
-
+#define make_strikethrough(mem) make_simple(mem, CMARK_NODE_STRIKETHROUGH)
 #define MAXBACKTICKS 1000
 
 typedef struct delimiter {
@@ -70,8 +70,7 @@ static CMARK_INLINE bool S_is_line_end_char(char c) {
   return (c == '\n' || c == '\r');
 }
 
-static delimiter *S_insert_emph(subject *subj, delimiter *opener,
-                                delimiter *closer);
+static delimiter *S_insert_emph(subject *subj, delimiter *opener, delimiter *closer);
 
 static int parse_inline(subject *subj, cmark_node *parent, int options);
 
@@ -634,6 +633,7 @@ static void process_emphasis(subject *subj, delimiter *stack_bottom) {
         openers_bottom_index = 2;
         break;
       case '*':
+      case '~':
         openers_bottom_index = 3 + (closer->length % 3);
         break;
       default:
@@ -657,7 +657,7 @@ static void process_emphasis(subject *subj, delimiter *stack_bottom) {
         opener = opener->previous;
       }
       old_closer = closer;
-      if (closer->delim_char == '*' || closer->delim_char == '_') {
+      if (closer->delim_char == '*' || closer->delim_char == '_' || closer->delim_char == '~') {
         if (opener_found) {
           closer = S_insert_emph(subj, opener, closer);
         } else {
@@ -700,8 +700,7 @@ static void process_emphasis(subject *subj, delimiter *stack_bottom) {
   }
 }
 
-static delimiter *S_insert_emph(subject *subj, delimiter *opener,
-                                delimiter *closer) {
+static delimiter *S_insert_emph(subject *subj, delimiter *opener, delimiter *closer) {
   delimiter *delim, *tmp_delim;
   bufsize_t use_delims;
   cmark_node *opener_inl = opener->inl_text;
@@ -727,10 +726,18 @@ static delimiter *S_insert_emph(subject *subj, delimiter *opener,
     delim = tmp_delim;
   }
 
-  // create new emph or strong, and splice it in to our inlines
-  // between the opener and closer
-  emph = use_delims == 1 ? make_emph(subj->mem) : make_strong(subj->mem);
-
+  // create new emph, strong or strike through and splice it
+  // in to our inlines between the opener and closer
+  if (use_delims == 1) {
+    emph = make_emph(subj->mem);
+  } else {
+    if (closer->delim_char == '*') {
+        emph = make_strong(subj->mem);
+    } else if (closer->delim_char == '~') {
+        emph = make_strikethrough(subj->mem);
+    }
+  }
+    
   tmp = opener_inl->next;
   while (tmp && tmp != closer_inl) {
     tmpnext = tmp->next;
@@ -1168,14 +1175,14 @@ static cmark_node *handle_newline(subject *subj) {
 }
 
 static bufsize_t subject_find_special_char(subject *subj, int options) {
-  // "\r\n\\`&_*[]<!"
+  // "\r\n\\`&_*[]<!~"
   static const int8_t SPECIAL_CHARS[256] = {
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1,
       1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -1239,6 +1246,7 @@ static int parse_inline(subject *subj, cmark_node *parent, int options) {
     new_inl = handle_pointy_brace(subj, options);
     break;
   case '*':
+  case '~':
   case '_':
   case '\'':
   case '"':

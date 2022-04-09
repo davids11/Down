@@ -399,13 +399,13 @@ static int S_render_node(cmark_renderer *renderer, cmark_node *node,
     break;
 
   case CMARK_NODE_STRONG:
-    if (entering) {
-      LIT("**");
-    } else {
-      LIT("**");
-    }
+    LIT("**");
     break;
 
+  case CMARK_NODE_STRIKETHROUGH:
+    LIT("~~");
+    break;
+  
   case CMARK_NODE_EMPH:
     // If we have EMPH(EMPH(x)), we need to use *_x_*
     // because **x** is STRONG(x):

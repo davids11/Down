@@ -267,6 +267,14 @@ static int S_render_node(cmark_node *node, cmark_event_type ev_type,
     }
     break;
 
+  case CMARK_NODE_STRIKETHROUGH:
+    if (entering) {
+        cmark_strbuf_puts(html, "<strikethrough>");
+    } else {
+        cmark_strbuf_puts(html, "</strikethrough>");
+    }
+    break;
+
   case CMARK_NODE_EMPH:
     if (entering) {
       cmark_strbuf_puts(html, "<em>");
