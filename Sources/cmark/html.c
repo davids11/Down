@@ -266,7 +266,14 @@ static int S_render_node(cmark_node *node, cmark_event_type ev_type,
       cmark_strbuf_puts(html, "</strong>");
     }
     break;
-
+  case CMARK_NODE_DIFF_BLOCK:
+    if (entering) {
+        cmark_strbuf_puts(html, "<diff>");
+    } else {
+        cmark_strbuf_puts(html, "</diff>");
+    }
+    break;
+          
   case CMARK_NODE_STRIKETHROUGH:
     if (entering) {
         cmark_strbuf_puts(html, "<strikethrough>");

@@ -8,6 +8,8 @@
 
 #if os(iOS)
 
+@testable import Down
+
 class CodeBlockStyleTests: StylerTestSuite {
 
     /// # Important
@@ -53,6 +55,40 @@ class CodeBlockStyleTests: StylerTestSuite {
         assertStyle(for: markdown, width: .wide)
     }
 
+    
+    func test_diffBlockStrikethrough() throws {
+        try evaluate(
+"""
+``````
+func doSomething() {
+   print("bye")
+~~   print("hi")~~
+}
+``````
+"""
+        )
+    }
+    
+    func test_diffBlock() throws {
+        try evaluate(
+"""
+``````
+func doSomething() {
++   print("bye")
+-   print("hi")
+}
+``````
+"""
+        )
+    }
+    
+    private func evaluate(_ text: String) throws {
+        let down = Down(markdownString: text)
+        let result = try down.toXML()
+        
+        print(result)
+    }
+    
 }
 
 #endif

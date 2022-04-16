@@ -173,6 +173,8 @@ const char *cmark_node_get_type_string(cmark_node *node) {
     return "list";
   case CMARK_NODE_ITEM:
     return "item";
+  case CMARK_NODE_DIFF_BLOCK:
+    return "diff";
   case CMARK_NODE_CODE_BLOCK:
     return "code_block";
   case CMARK_NODE_HTML_BLOCK:

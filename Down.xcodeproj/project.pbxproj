@@ -66,6 +66,7 @@
 		907C64651EC133780095FEE1 /* TestDownView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 907C64621EC120530095FEE1 /* TestDownView.bundle */; };
 		90A40A9C1EC03292004F2E91 /* Down.framework in Copy Bundled Frameworks */ = {isa = PBXBuildFile; fileRef = 8A569F401E6B3E50008BE2AC /* Down.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B9468F6D28008AB700C0842A /* Strikethrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9468F6C28008AB700C0842A /* Strikethrough.swift */; };
+		B9BE82EC2807207000E9A4C2 /* CodeDiffBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BE82EB2807207000E9A4C2 /* CodeDiffBlock.swift */; };
 		EE0E54F82300800E0070C83F /* BlockBackgroundColorAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0E54F72300800E0070C83F /* BlockBackgroundColorAttribute.swift */; };
 		EE3E7E38260400E800170A52 /* DownDebugLayoutManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5D2DF822FC9E89009EC13E /* DownDebugLayoutManagerTests.swift */; };
 		EE3E7E3F260400EE00170A52 /* LinkStyleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE5D2DF522FC99A6009EC13E /* LinkStyleTests.swift */; };
@@ -212,6 +213,7 @@
 		90A40A991EC0309A004F2E91 /* Universal-Framework-Target.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Universal-Framework-Target.xcconfig"; sourceTree = "<group>"; };
 		90A40A9A1EC0309A004F2E91 /* Universal-Target-Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Universal-Target-Base.xcconfig"; sourceTree = "<group>"; };
 		B9468F6C28008AB700C0842A /* Strikethrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strikethrough.swift; sourceTree = "<group>"; };
+		B9BE82EB2807207000E9A4C2 /* CodeDiffBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeDiffBlock.swift; sourceTree = "<group>"; };
 		D41689B21CFFE28200E5802B /* DownViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownViewTests.swift; sourceTree = "<group>"; };
 		D41689B51CFFE6BB00E5802B /* DownView.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = DownView.bundle; sourceTree = "<group>"; };
 		D4201EC51CFA59A5008EEC6E /* BindingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BindingTests.swift; sourceTree = "<group>"; };
@@ -706,6 +708,7 @@
 				EEEBEE58225D2A7000AE438D /* ThematicBreak.swift */,
 				26CABB92252B4D490032183C /* ChildSequence.swift */,
 				B9468F6C28008AB700C0842A /* Strikethrough.swift */,
+				B9BE82EB2807207000E9A4C2 /* CodeDiffBlock.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -1008,6 +1011,7 @@
 				8A569F651E6B3ED9008BE2AC /* references.c in Sources */,
 				EEEBEE67225D2AF900AE438D /* Emphasis.swift in Sources */,
 				EEA2BDCA22F7152B00D0C72C /* ThematicBreakOptions.swift in Sources */,
+				B9BE82EC2807207000E9A4C2 /* CodeDiffBlock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

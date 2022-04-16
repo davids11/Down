@@ -878,6 +878,8 @@ static cmark_node *check_open_blocks(cmark_parser *parser, cmark_chunk *input,
       if (!parse_code_block_prefix(parser, input, container, &should_continue))
         goto done;
       break;
+    case CMARK_NODE_DIFF_BLOCK:
+      goto done;
     case CMARK_NODE_HEADING:
       // a heading can never contain more than one line
       goto done;
@@ -965,8 +967,16 @@ static void open_new_blocks(cmark_parser *parser, cmark_node **container,
 
     } else if (!indented && (matched = scan_open_code_fence(
                                  input, parser->first_nonspace))) {
-      *container = add_child(parser, *container, CMARK_NODE_CODE_BLOCK,
-                             parser->first_nonspace + 1);
+      if (matched == 3) {
+        // code block
+          *container = add_child(parser, *container, CMARK_NODE_CODE_BLOCK,
+                                 parser->first_nonspace + 1);
+      } else if (matched == 6) {
+        // diff block
+          *container = add_child(parser, *container, CMARK_NODE_DIFF_BLOCK,
+                                 parser->first_nonspace + 1);
+      }
+      
       (*container)->as.code.fenced = true;
       (*container)->as.code.fence_char = peek_at(input, parser->first_nonspace);
       (*container)->as.code.fence_length = (matched > 255) ? 255 : matched;

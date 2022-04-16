@@ -8,6 +8,8 @@
 
 #if os(iOS)
 
+@testable import Down
+
 class InlineStyleTests: StylerTestSuite {
 
     // # Important
@@ -17,6 +19,43 @@ class InlineStyleTests: StylerTestSuite {
 
     // MARK: - Simple
 
+    func test_StrikethroughText() throws {
+        try evaluate("Text ~~strike through~~ text.")
+        try evaluate("~~Strike through text.~~")
+        try evaluate("~~func bool(forKey aKey: String)~~")
+        try evaluate(
+"""
+~~func bool(forKey aKey: String)~~
+
+## Headline
+
+**bold statement**
+""")
+    }
+    
+    func test_inlineCode() throws {
+        try evaluate("Text `code` is cool.")
+    }
+    
+    func test_codeBlock() throws {
+        try evaluate(
+"""
+```
+func doSomething() {
+    print("hi")
+}
+```
+"""
+        )
+    }
+    
+    private func evaluate(_ text: String) throws {
+        let down = Down(markdownString: text)
+        let result = try down.toXML()
+        
+        print(result)
+    }
+    
     func testThat_StrongText_IsStyled() {
         // Given
         let markdown = "Text **strong** text."
@@ -25,6 +64,14 @@ class InlineStyleTests: StylerTestSuite {
         assertStyle(for: markdown, width: .wide)
     }
 
+    func testThat_StrikethroughText_IsStyled() {
+        // Given
+        let markdown = "Text ~~strike through~~ text."
+
+        // Then
+        assertStyle(for: markdown, width: .wide)
+    }
+    
     func testThat_EmphasizedText_IsStyled() {
         // Given
         let markdown = "Text _emphasized_ text."

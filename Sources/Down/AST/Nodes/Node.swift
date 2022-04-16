@@ -54,6 +54,7 @@ public extension CMarkNode {
         case CMARK_NODE_LIST:           return List(cmarkNode: self)
         case CMARK_NODE_ITEM:           return Item(cmarkNode: self)
         case CMARK_NODE_CODE_BLOCK:     return CodeBlock(cmarkNode: self)
+        case CMARK_NODE_DIFF_BLOCK:     return CodeDiffBlock(cmarkNode: self)
         case CMARK_NODE_HTML_BLOCK:     return HtmlBlock(cmarkNode: self)
         case CMARK_NODE_CUSTOM_BLOCK:   return CustomBlock(cmarkNode: self)
         case CMARK_NODE_PARAGRAPH:      return Paragraph(cmarkNode: self)

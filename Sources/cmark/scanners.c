@@ -12176,6 +12176,9 @@ bufsize_t _scan_open_code_fence(const unsigned char *p) {
     yych = *p;
     marker = p;
     if (yybm[0 + yych] & 64) {
+    if (yych == '`') {
+      goto yy788;
+    }
       goto yy797;
     }
     if (yych <= 0xE0) {
